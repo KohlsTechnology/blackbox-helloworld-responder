@@ -1,4 +1,4 @@
-BINARY = prometheus_bigquery_remote_storage_adapter
+BINARY = blackbox-helloworld-responder
 COMMIT := $(shell git rev-parse HEAD)
 BRANCH := $(shell git symbolic-ref --short -q HEAD || echo HEAD)
 DATE := $(shell date -u +%Y%m%d-%H:%M:%S)
@@ -23,7 +23,7 @@ image:
 	docker build . -t quay.io/kohlstechnology/blackbox-helloworld-responder:latest
 
 .PHONY: test
-test: fmt vet test-unit
+test: fmt vet lint test-unit
 
 .PHONY: test-unit
 test-unit:
