@@ -24,7 +24,7 @@ checksum:
 snapshot:
   name_template: "{{.Tag}}-next"
 changelog:
-  skip: true
+  skip: false
 dockers:
   - binaries:
     - blackbox-helloworld-responder
