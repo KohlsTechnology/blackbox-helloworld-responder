@@ -53,7 +53,7 @@ make build
 
 ## Image
 
-In order to build the docker image, simply execute
+In order to build the docker image, simply execute:
 
 ```
 make image
@@ -62,7 +62,9 @@ make image
 ## Testing
 
 ### Unit Test
-`make test`
+```
+make test
+```
 
 ## Releasing
 
@@ -79,4 +81,7 @@ $ GITHUB_TOKEN=xxx make clean release
 ```
 
 ### Test Release
-`make test-release`
+
+```
+make test-release
+```
