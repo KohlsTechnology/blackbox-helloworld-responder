@@ -70,7 +70,7 @@ func httpHelloServer(port int) {
 		Handler:      mux,
 	}
 	mux.HandleFunc("/", httpHelloHandler)
-	httpsrv.ListenAndServe()
+	log.Fatal(httpsrv.ListenAndServe())
 }
 
 // httpHelloServer starts a simple HelloWorld TCP Server
