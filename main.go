@@ -88,7 +88,10 @@ func tcpHelloServer(port int) {
 			log.Fatal(err)
 		}
 		log.Printf("TCP %s\n", connection.RemoteAddr())
-		connection.Write([]byte(`Hello World!`))
+		_, err = connection.Write([]byte(`Hello World!`))
+		if err != nil {
+			log.Println(err)
+		}
 		connection.Close()
 	}
 }
