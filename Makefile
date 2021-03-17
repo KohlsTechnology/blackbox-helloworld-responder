@@ -23,7 +23,7 @@ image:
 	docker build . -t quay.io/kohlstechnology/blackbox-helloworld-responder:latest
 
 .PHONY: test
-test: fmt vet lint test-unit
+test: lint-all test-unit
 
 .PHONY: test-unit
 test-unit:
@@ -39,17 +39,16 @@ test-dirty: build
 test-release:
 	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser --snapshot --skip-publish --rm-dist
 
-.PHONY: fmt
-fmt:
-	test -z "$(shell gofmt -l .)"
-
 .PHONY: lint
 lint:
 	LINT_INPUT="$(shell go list ./...)"; golint -set_exit_status $$LINT_INPUT
 
-.PHONY: vet
-vet:
-	VET_INPUT="$(shell go list ./...)"; go vet $$VET_INPUT
+.PHONY: golangci-lint
+golangci-lint:
+	golangci-lint run
+
+.PHONY: lint-all
+lint-all: lint golangci-lint
 
 .PHONY: tag
 tag:

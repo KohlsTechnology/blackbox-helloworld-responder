@@ -25,8 +25,17 @@ jobs:
       run: GO111MODULE=off go get golang.org/x/lint/golint
     - name: Compile
       run: make build
+    - name: Lint
+      run: make lint
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        version: v1.38.0
+        skip-go-installation: true
+        skip-pkg-cache: true
+        skip-build-cache: true
     - name: Test
-      run: make test
+      run: make test-unit
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
