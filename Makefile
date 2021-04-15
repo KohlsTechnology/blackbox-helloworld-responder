@@ -8,7 +8,7 @@ LDFLAGS := "-X ${VERSION_PKG}.Branch=${BRANCH} -X ${VERSION_PKG}.BuildDate=${DAT
 TAG?=""
 
 .PHONY: all
-all: build image
+all: build
 
 .PHONY: clean
 clean:
