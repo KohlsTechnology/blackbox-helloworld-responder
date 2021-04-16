@@ -1,5 +1,8 @@
 # Blackbox HelloWorld Responder
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/KohlsTechnology/blackbox-helloworld-responder)](https://goreportcard.com/report/github.com/KohlsTechnology/blackbox-helloworld-responder)
+[![codecov](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder/branch/master/graph/badge.svg)](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder)
+
 The blackbox-helloworld-responder's sole purpose is to respond with "Hello World!" on either a HTTP or TCP connection. It is intended to work as a simple responder for blackbox or synthetic transaction monitoring, using tools like the [Prometheus Blackbox Exporter](https://github.com/prometheus/blackbox_exporter). It purposely is written very simple, so that it can run securely and with minimal resources.
 
 ## License
@@ -68,13 +71,13 @@ make test
 
 ## Releasing
 
-This project is using [goreleaser](https://goreleaser.com). GitHub release creation is automated using Travis
-CI. New releases are automatically created when new tags are pushed to the repo.
+This project is using [goreleaser](https://goreleaser.com). GitHub release creation is automated using GitHub
+Actions. New releases are automatically created when new tags are pushed to the repo.
 ```
 $ TAG=v0.0.2 make tag
 ```
 
-How to manually create a release without relying on Travis CI.
+How to manually create a release without relying on GitHub Actions.
 ```
 $ TAG=v0.0.2 make tag
 $ GITHUB_TOKEN=xxx make clean release
