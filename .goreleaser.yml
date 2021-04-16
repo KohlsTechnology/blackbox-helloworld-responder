@@ -1,3 +1,4 @@
+---
 project_name: blackbox-helloworld-responder
 env:
   - CGO_ENABLED=0
@@ -25,14 +26,3 @@ snapshot:
   name_template: "{{.Tag}}-next"
 changelog:
   skip: false
-dockers:
-  - binaries:
-    - blackbox-helloworld-responder
-    image_templates:
-      - "quay.io/kohlstechnology/{{.ProjectName}}:{{.Tag}}"
-      - "quay.io/kohlstechnology/{{.ProjectName}}:latest"
-    build_flag_templates:
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.name={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
