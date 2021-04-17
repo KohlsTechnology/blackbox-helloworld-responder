@@ -37,7 +37,7 @@ test-dirty: build
 # Make sure goreleaser is working
 .PHONY: test-release
 test-release:
-	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser --snapshot --skip-publish --rm-dist
+	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --snapshot --skip-publish --rm-dist
 
 .PHONY: lint
 lint:
@@ -58,4 +58,4 @@ tag:
 # Requires GITHUB_TOKEN environment variable to be set
 .PHONY: release
 release:
-	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser
+	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --rm-dist

@@ -43,6 +43,13 @@ jobs:
         fail_ci_if_error: true
         files: ./coverage.txt
         verbose: true
+    - name: Install GoReleaser
+      uses: goreleaser/goreleaser-action@v2
+      with:
+        install-only: true
+        version: v0.162.0
+    - name: Test GoReleaser
+      run: make test-release
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: test
@@ -53,10 +60,6 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          echo "BRANCH=$(git symbolic-ref --short -q HEAD || echo HEAD)" >> $GITHUB_ENV                          # for goreleaser
-          echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV                                                     # for goreleaser
-          echo "DATE=$(date -u +%Y%m%d-%H:%M:%S)" >> $GITHUB_ENV                                                 # for goreleaser
-          echo "VERSION_PKG=github.com/KohlsTechnology/blackbox-helloworld-responder/pkg/version" >> $GITHUB_ENV # for goreleaser
           DOCKER_IMAGE=quay.io/kohlstechnology/blackbox-helloworld-responder
           VERSION=${GITHUB_REF#refs/tags/}
           TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:latest"
@@ -75,10 +78,12 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.prep.outputs.tags }}
-      - name: Run GoReleaser
+      - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          version: latest
-          args: release --rm-dist
+          install-only: true
+          version: v0.162.0
+      - name: Run GoReleaser
+        run: make release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
