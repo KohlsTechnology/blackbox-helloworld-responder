@@ -1,7 +1,9 @@
 # Blackbox HelloWorld Responder
 
+[![Build Status](https://github.com/KohlsTechnology/blackbox-helloworld-responder/actions/workflows/pipeline.yml/badge.svg?branch=master)]((https://github.com/KohlsTechnology/blackbox-helloworld-responder/actions))
 [![Go Report Card](https://goreportcard.com/badge/github.com/KohlsTechnology/blackbox-helloworld-responder)](https://goreportcard.com/report/github.com/KohlsTechnology/blackbox-helloworld-responder)
-[![codecov](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder/branch/master/graph/badge.svg)](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder) [![Join the chat at https://gitter.im/KohlsTechnology/helloworld-responder](https://badges.gitter.im/KohlsTechnology/helloworld-responder.svg)](https://gitter.im/KohlsTechnology/helloworld-responder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![codecov](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder/branch/master/graph/badge.svg)](https://codecov.io/gh/KohlsTechnology/blackbox-helloworld-responder)
+[![Join the chat at https://gitter.im/KohlsTechnology/helloworld-responder](https://badges.gitter.im/KohlsTechnology/helloworld-responder.svg)](https://gitter.im/KohlsTechnology/helloworld-responder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The blackbox-helloworld-responder's sole purpose is to respond with "Hello World!" on either a HTTP or TCP connection. It is intended to work as a simple responder for blackbox or synthetic transaction monitoring, using tools like the [Prometheus Blackbox Exporter](https://github.com/prometheus/blackbox_exporter). It purposely is written very simple, so that it can run securely and with minimal resources.
 
