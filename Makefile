@@ -18,6 +18,10 @@ clean:
 build:
 	CGO_ENABLED=0 go build -o $(BINARY) -ldflags $(LDFLAGS)
 
+.PHONY: vendor
+vendor:
+	go mod vendor
+
 .PHONY: image
 image:
 	docker build . -t quay.io/kohlstechnology/blackbox-helloworld-responder:latest
@@ -31,8 +35,10 @@ test-unit:
 
 # Make sure go.mod and go.sum are not modified
 .PHONY: test-dirty
-test-dirty: build
+test-dirty: vendor build
+	go mod tidy
 	git diff --exit-code
+	# TODO: also check that there are no untracked files, e.g. extra .go
 
 # Make sure goreleaser is working
 .PHONY: test-release
