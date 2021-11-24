@@ -32,8 +32,8 @@ func main() {
 	log.SetOutput(os.Stdout)
 	log.Println(version.Get())
 
-	var portHTTP int = 8080
-	var portTCP int = 8081
+	portHTTP := 8080
+	portTCP := 8081
 	var err error
 
 	envPort, ok := os.LookupEnv("HELLO_WORLD_HTTP_PORT")
