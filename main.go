@@ -17,12 +17,15 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 	"time"
 
 	"github.com/KohlsTechnology/blackbox-helloworld-responder/pkg/version"
@@ -70,7 +73,22 @@ func httpHelloServer(port int) {
 		Handler:      mux,
 	}
 	mux.HandleFunc("/", httpHelloHandler)
-	log.Fatal(httpsrv.ListenAndServe())
+	idleConnectionClosed := make(chan struct{})
+	go func() {
+		sigChan := make(chan os.Signal, 1)
+		signal.Notify(sigChan, syscall.SIGTERM, os.Interrupt)
+		oscall := <-sigChan
+		log.Printf("System Call %v Received stopping HTTP Server...", oscall)
+		if err := httpsrv.Shutdown(context.Background()); err != nil {
+			log.Fatal("Shutdown Error", err)
+		}
+		close(idleConnectionClosed)
+		log.Printf("HTTP Server Shutdown, and connections closed")
+	}()
+	if err := httpsrv.ListenAndServe(); err != http.ErrServerClosed {
+		log.Fatal("Error, Failed to Listen and Serve", err)
+	}
+	<-idleConnectionClosed
 }
 
 // httpHelloServer starts a simple HelloWorld TCP Server
@@ -80,6 +98,16 @@ func tcpHelloServer(port int) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	go func() {
+		sigChan := make(chan os.Signal, 1)
+		signal.Notify(sigChan, syscall.SIGTERM, os.Interrupt)
+		oscall := <-sigChan
+		log.Printf("Systemcall %v Received Stopping TCP Server...", oscall)
+		listener.Close()
+		log.Printf("TCP Server Shutdown!")
+	}()
+
 	defer listener.Close()
 
 	for {
