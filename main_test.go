@@ -17,7 +17,7 @@ package main
 
 import (
 	"bufio"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"testing"
@@ -38,7 +38,7 @@ func TestHTTP(t *testing.T) {
 	if http.StatusOK != resp.StatusCode {
 		t.Fatalf("http test returned status: %d, wanted: %d", resp.StatusCode, http.StatusOK)
 	}
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
