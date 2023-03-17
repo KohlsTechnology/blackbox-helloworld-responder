@@ -1,3 +1,3 @@
 module github.com/KohlsTechnology/blackbox-helloworld-responder
 
-go 1.19
+go 1.20
