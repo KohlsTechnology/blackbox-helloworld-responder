@@ -43,7 +43,7 @@ test-dirty: vendor build
 # Make sure goreleaser is working
 .PHONY: test-release
 test-release:
-	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --snapshot --skip-publish --rm-dist
+	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --snapshot --skip-publish --clean
 
 .PHONY: golangci-lint
 golangci-lint:
@@ -60,4 +60,4 @@ tag:
 # Requires GITHUB_TOKEN environment variable to be set
 .PHONY: release
 release:
-	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --rm-dist
+	BRANCH=$(BRANCH) COMMIT=$(COMMIT) DATE=$(DATE) VERSION_PKG=$(VERSION_PKG) goreleaser release --clean
