@@ -41,7 +41,7 @@ jobs:
     - name: Image Build
       run: make image
     - name: Install GoReleaser
-      uses: goreleaser/goreleaser-action@v4
+      uses: goreleaser/goreleaser-action@v5
       with:
         install-only: true
         version: v1.20.0
@@ -82,7 +82,7 @@ jobs:
           push: true
           tags: ${{ steps.prep.outputs.tags }}
       - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v5
         with:
           install-only: true
           version: v1.20.0
