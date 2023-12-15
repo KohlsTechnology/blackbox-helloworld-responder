@@ -1,4 +1,4 @@
-FROM golang:1.21.3 AS builder
+FROM golang:1.21.5 AS builder
 
 WORKDIR /go/src/github.com/KohlsTechnology/blackbox-helloworld-responder
 COPY . .
