@@ -26,7 +26,7 @@ var (
 	Branch    string
 	BuildDate string
 	GitSHA1   string
-	Version   = "v0.1.22"
+	Version   = "v0.2.0"
 )
 
 // Get returns the version string with some additional details
