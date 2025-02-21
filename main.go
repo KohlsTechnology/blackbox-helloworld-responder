@@ -17,12 +17,15 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 	"time"
 
 	"github.com/KohlsTechnology/blackbox-helloworld-responder/pkg/version"
@@ -70,7 +73,23 @@ func httpHelloServer(port int) {
 		Handler:      mux,
 	}
 	mux.HandleFunc("/", httpHelloHandler)
-	log.Fatal(httpsrv.ListenAndServe())
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	done := make(chan bool, 1)
+	go func() {
+		sig := <-sigs
+		log.Printf("HTTP Received Signal %v", sig)
+		httpsrv.Shutdown(context.Background())
+		done <- true
+	}()
+	log.Println("HTTP awaiting signal")
+	if err := httpsrv.ListenAndServe(); err != http.ErrServerClosed {
+		// Error starting or closing listener:
+		log.Fatalf("HTTP server ListenAndServe: %v", err)
+	}
+	<-done
+	log.Println("HTTP exiting")
+
 }
 
 // httpHelloServer starts a simple HelloWorld TCP Server
