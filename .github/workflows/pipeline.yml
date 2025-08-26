@@ -31,7 +31,7 @@ jobs:
     - name: Test
       run: make test-unit
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v5.4.3
+      uses: codecov/codecov-action@v5.5.0
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
