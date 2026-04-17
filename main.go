@@ -30,7 +30,7 @@ import (
 
 func main() {
 	log.SetOutput(os.Stdout)
-	log.Println(version.Get())
+	log.Println(versioninfo.Get())
 
 	portHTTP := 8080
 	portTCP := 8081
